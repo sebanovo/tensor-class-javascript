@@ -1,4 +1,4 @@
-label {
+/* label {
   display: flex;
   align-items: center;
   text-align: center;
@@ -14,14 +14,14 @@ input[type='range'] {
   -webkit-transition: 0.2s;
   transition: opacity 0.2s;
 }
+input[type='range'] {
+  margin: 10px;
+} */
+
 .ranges-container {
   position: absolute;
   top: 0;
   right: 0;
   display: flex;
-  flex-direction: column;
-}
-
-input[type='range'] {
   margin: 10px;
 }

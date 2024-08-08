@@ -1,0 +1,13 @@
+.ranges-container > button {
+  outline: none;
+  background-color: #1f4e5f;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  padding: 10px 20px;
+}
+
+.ranges-container > button:hover {
+  background-color: #1f4e5f;
+  opacity: 0.5;
+}

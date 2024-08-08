@@ -3,6 +3,7 @@ const $ = elemento => document.querySelector(elemento);
 const botones = {
   Cargar: $('#Cargar'),
   CargarSerieAritmetica: $('#CargarSerieAritmetica'),
+  CargarSerieGeometrica: $('#CargarSerieGeometrica'),
   Pertenencia: $('#Pertenencia'),
   VerificarMayor: $('#VerificarMayor'),
   VerificarMenor: $('#VerificarMenor'),
