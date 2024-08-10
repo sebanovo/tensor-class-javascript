@@ -14,7 +14,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 )
-camera.position.z = 50
+camera.position.z = 30
 
 // WEBGL
 const renderer = new THREE.WebGLRenderer()
@@ -34,7 +34,7 @@ const fontSize = 2
 const fontHeight = 0
 const cubeDepth = 0.01
 const gap = 0
-let layerGrap = 40
+let layerGrap = 1e3
 const colors = [0x000000]
 
 function clearScene() {
@@ -60,52 +60,48 @@ const material = new THREE.MeshBasicMaterial({
 // CUBE
 const cube = new THREE.Mesh(geometry, material)
 
-/**
- * @param {Tensor} tensor tensor a dibujar
- */
+const totalWidth = tensor.columnas * (cubeWidth + gap)
+const totalHeight = tensor.filas * (cubeHeight + gap)
+
 export function drawTensor(tensor) {
-  const font = loader.parse(json);
+  const font = loader.parse(json)
 
   for (let z = 0; z < tensor.capas; z++) {
     for (let x = 0; x < tensor.filas; x++) {
       for (let y = 0; y < tensor.columnas; y++) {
-        // Color de los cubos
-        const geometry = new THREE.BoxGeometry(cubeWidth, cubeHeight, cubeDepth);
+        const geometry = new THREE.BoxGeometry(cubeWidth, cubeHeight, cubeDepth)
         const material = new THREE.MeshBasicMaterial({
           color: colors[(x + y + z) % colors.length],
           transparent: true,
           opacity: 0.5
-        });
-        const cube = new THREE.Mesh(geometry, material);
+        })
+        const cube = new THREE.Mesh(geometry, material)
 
-        // Posición de los cubos
         cube.position.set(
-          y * (cubeWidth + gap),
-          -x * (cubeHeight + gap), 
-          -z * cubeDepth * layerGrap * layerGrap 
-        );
-        scene.add(cube);
+          y * (cubeWidth + gap) - totalWidth / 2 + cubeWidth / 2,
+          -x * (cubeHeight + gap) + totalHeight / 2 - cubeHeight / 2,
+          -z * cubeDepth * layerGrap
+        )
+        scene.add(cube)
 
-        // Dibujar Texto
         const textGeometry = new TextGeometry(tensor.tensor[z][x][y].toString(), {
           font: font,
           size: fontSize,
-          depth: fontHeight 
-        });
+          depth: fontHeight
+        })
 
-        const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+        const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff })
+        const textMesh = new THREE.Mesh(textGeometry, textMaterial)
 
-        // Centrar el texto
-        textGeometry.computeBoundingBox();
-        const textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
+        textGeometry.computeBoundingBox()
+        const textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x
         textMesh.position.set(
-          y * (cubeWidth + gap) - textWidth / 2, 
-          -x * (cubeHeight + gap), 
-          -z * cubeDepth * layerGrap * layerGrap + cubeDepth / 2 + 0.05 
-        );
+          y * (cubeWidth + gap) - totalWidth / 2 + cubeWidth / 2 - textWidth / 2,
+          -x * (cubeHeight + gap) + totalHeight / 2 - cubeHeight / 2,
+          -z * cubeDepth * layerGrap + cubeDepth / 2 + 0.05
+        )
 
-        scene.add(textMesh);
+        scene.add(textMesh)
       }
     }
   }
@@ -124,3 +120,12 @@ function animate() {
 }
 
 animate()
+
+export function incrementLayerGrap() {
+  layerGrap += 1e3
+}
+
+export function decrementLayerGrap() {
+  if (layerGrap - 1e3 === 0) return
+  layerGrap -= 1e3
+}

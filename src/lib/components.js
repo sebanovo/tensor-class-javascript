@@ -1,4 +1,4 @@
-const $ = elemento => document.querySelector(elemento);
+const $ = elemento => document.querySelector(elemento)
 
 const botones = {
   Cargar: $('#Cargar'),
@@ -18,6 +18,6 @@ const botones = {
   VerificarOrdenado: $('#VerificarOrdenado'),
   BuscarPosicion: $('#BuscarPosicion'),
   Frecuencia: $('#Frecuencia')
-};
+}
 
-export default botones;
+export default botones

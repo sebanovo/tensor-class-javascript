@@ -1,13 +1,21 @@
-.ranges-container > button {
+.layer-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  margin: 10px;
+  gap: 10px;
+}
+
+.layer-container > button {
   outline: none;
-  background-color: #1f4e5f;
-  border-radius: 10px;
+  background-color: #242424;
+  border: 1px solid white;
+  border-radius: 100px;
   cursor: pointer;
   color: white;
   padding: 10px 20px;
 }
-
-.ranges-container > button:hover {
-  background-color: #1f4e5f;
-  opacity: 0.5;
+.layer-container > button:hover {
+  background-color: #333030;
 }

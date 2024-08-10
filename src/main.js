@@ -1,6 +1,2 @@
-import './stylesheets/global.css'
-import './stylesheets/button.css'
-import './stylesheets/menu.css'
-import './stylesheets/range.css'
-import './js/tensor-visualizer.js'
-import './js/events.js'
+import './scripts/tensor-visualizer.js'
+import './scripts/events.js'

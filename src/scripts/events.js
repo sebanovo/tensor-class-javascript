@@ -1,7 +1,12 @@
-import { promptSwal, check, messageSwal } from './alertSwal'
+import { promptSwal, check, messageSwal } from '../lib/alertSwal'
 import { Tensor } from 'utilities-library'
-import { drawTensor, updateTensor } from './tensor-visualizer'
-import botones from './$'
+import {
+  drawTensor,
+  updateTensor,
+  incrementLayerGrap,
+  decrementLayerGrap
+} from './tensor-visualizer'
+import botones from '../lib/components'
 
 let t1 = new Tensor()
 
@@ -9,12 +14,12 @@ t1.cargar(3, 3, 3, 1, 9)
 drawTensor(t1)
 
 document.getElementById('increase-layer').addEventListener('click', () => {
-  //layerGrap += 5
+  incrementLayerGrap()
   updateTensor(t1)
 })
 
 document.getElementById('decrease-layer').addEventListener('click', () => {
-  //layerGrap -= 5
+  decrementLayerGrap()
   updateTensor(t1)
 })
 
@@ -104,32 +109,42 @@ botones.CargarSerieGeometrica.addEventListener('click', async () => {
 
 botones.Pertenencia.addEventListener('click', async () => {
   const number = await promptSwal('Número')
-  messageSwal(t1.pertenencia(Number(number.value)) ? 'Pertenece': 'No pertenece')
+  messageSwal(t1.pertenencia(Number(number.value)) ? 'Pertenece' : 'No pertenece')
 })
 
 botones.VerificarMayor.addEventListener('click', async () => {
   const number = await promptSwal('Número')
-  messageSwal(t1.verificarMayor(Number(number.value))? 'Es mayor': 'No es Mayor')
+  messageSwal(t1.verificarMayor(Number(number.value)) ? 'Es mayor' : 'No es Mayor')
 })
 
 botones.VerificarMenor.addEventListener('click', async () => {
   const number = await promptSwal('Número')
-  messageSwal(t1.verificarMenor(Number(number.value))? 'Es menor': 'No es Menor')
+  messageSwal(t1.verificarMenor(Number(number.value)) ? 'Es menor' : 'No es Menor')
 })
 
 botones.VerificarTodosIguales.addEventListener('click', () => {
-  messageSwal(t1.verificarTodosIguales() ? 'Todos los elementos son iguales': 'No todos los elementos son iguales')
+  messageSwal(
+    t1.verificarTodosIguales()
+      ? 'Todos los elementos son iguales ✔'
+      : 'No todos los elementos son iguales ❌'
+  )
 })
 
 botones.MultiplicacionPorEscalar.addEventListener('click', async () => {
   const number = await promptSwal('Escalar')
-  t1.multiplicacionPorEscalar(Number(number.value));
+  t1.multiplicacionPorEscalar(Number(number.value))
   updateTensor(t1)
 })
 
 botones.Transposición.addEventListener('click', () => {
-  // lógica para transposición
-  // pending
+  t1.transposicion()
+  t1.transposicion()
+  updateTensor(t1)
+  check({
+    title: 'Transposición',
+    text: 'Tensor transpuesto Correctamente',
+    icon: 'success'
+  })
 })
 
 botones.DevolverMayor.addEventListener('click', () => {
@@ -171,16 +186,16 @@ botones.IntercalarParImpar.addEventListener('click', () => {
 })
 
 botones.VerificarOrdenado.addEventListener('click', () => {
-  messageSwal(t1.verificarOrdenado() ? "Tensor Ordenado": "Tensor No ordenado")
+  messageSwal(t1.verificarOrdenado() ? 'Tensor Ordenado' : 'Tensor No ordenado')
 })
 
-botones.BuscarPosicion.addEventListener('click', async() => {
+botones.BuscarPosicion.addEventListener('click', async () => {
   const number = await promptSwal('Número a buscar')
   const [x, y, z] = t1.buscarPosicion(Number(number.value))
   messageSwal(`(x,y,z) = (${x},${y},${z})`)
 })
 
-botones.Frecuencia.addEventListener('click', async() => {
+botones.Frecuencia.addEventListener('click', async () => {
   const number = await promptSwal('Número a sacar Frecuencia')
   const frecuencia = t1.frecuencia(Number(number.value))
   messageSwal(`Frecuencia = ${frecuencia}`)
