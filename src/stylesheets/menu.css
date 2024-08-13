@@ -1,6 +1,8 @@
 .menu {
   position: absolute;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 30px;
   margin: 10px;
   filter: drop-shadow(0 0 2em #6a9edeaa);
 }

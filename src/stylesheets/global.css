@@ -18,3 +18,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#icon-github {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#icon-github:hover {
+  filter: drop-shadow(0 0 1em #6a9edeaa);
+}
