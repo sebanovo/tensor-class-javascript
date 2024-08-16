@@ -4,6 +4,8 @@ const botones = {
   Cargar: $('#Cargar'),
   CargarSerieAritmetica: $('#CargarSerieAritmetica'),
   CargarSerieGeometrica: $('#CargarSerieGeometrica'),
+  CargarDiana: $('#CargarDiana'),
+  CargarL: $('#CargarL'),
   Pertenencia: $('#Pertenencia'),
   VerificarMayor: $('#VerificarMayor'),
   VerificarMenor: $('#VerificarMenor'),

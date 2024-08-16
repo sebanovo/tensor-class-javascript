@@ -58,9 +58,9 @@ botones.CargarSerieAritmetica.addEventListener('click', async () => {
   if (!result2.isConfirmed) return
   const result3 = await promptSwal('Capas')
   if (!result3.isConfirmed) return
-  const result4 = await promptSwal('Número inicial (a1)')
+  const result4 = await promptSwal('Valor inicial')
   if (!result4.isConfirmed) return
-  const result5 = await promptSwal('Razón (razón)')
+  const result5 = await promptSwal('La razón aritmetica')
   if (!result5.isConfirmed) return
 
   const nroFila = Number(result1.value)
@@ -86,9 +86,9 @@ botones.CargarSerieGeometrica.addEventListener('click', async () => {
   if (!result2.isConfirmed) return
   const result3 = await promptSwal('Capas')
   if (!result3.isConfirmed) return
-  const result4 = await promptSwal('Número inicial (a1)')
+  const result4 = await promptSwal('Valor inicial')
   if (!result4.isConfirmed) return
-  const result5 = await promptSwal('Razón (razón)')
+  const result5 = await promptSwal('La razón Geometrica')
   if (!result5.isConfirmed) return
 
   const nroFila = Number(result1.value)
@@ -107,18 +107,35 @@ botones.CargarSerieGeometrica.addEventListener('click', async () => {
   })
 })
 
+botones.CargarDiana.addEventListener('click', async () => {
+  const number = await promptSwal('Tamaño')
+  if (!number.isConfirmed) return
+  t1.cargarDiana(Number(number.value))
+  updateTensor(t1)
+})
+
+botones.CargarL.addEventListener('click', async () => {
+  const number = await promptSwal('Tamaño')
+  if (!number.isConfirmed) return
+  t1.cargarL(Number(number.value))
+  updateTensor(t1)
+})
+
 botones.Pertenencia.addEventListener('click', async () => {
   const number = await promptSwal('Número')
+  if (!number.isConfirmed) return
   messageSwal(t1.pertenencia(Number(number.value)) ? 'Pertenece' : 'No pertenece')
 })
 
 botones.VerificarMayor.addEventListener('click', async () => {
   const number = await promptSwal('Número')
+  if (!number.isConfirmed) return
   messageSwal(t1.verificarMayor(Number(number.value)) ? 'Es mayor' : 'No es Mayor')
 })
 
 botones.VerificarMenor.addEventListener('click', async () => {
   const number = await promptSwal('Número')
+  if (!number.isConfirmed) return
   messageSwal(t1.verificarMenor(Number(number.value)) ? 'Es menor' : 'No es Menor')
 })
 
@@ -132,12 +149,12 @@ botones.VerificarTodosIguales.addEventListener('click', () => {
 
 botones.MultiplicacionPorEscalar.addEventListener('click', async () => {
   const number = await promptSwal('Escalar')
+  if (!number.isConfirmed) return
   t1.multiplicacionPorEscalar(Number(number.value))
   updateTensor(t1)
 })
 
 botones.Transposición.addEventListener('click', () => {
-  t1.transposicion()
   t1.transposicion()
   updateTensor(t1)
   check({

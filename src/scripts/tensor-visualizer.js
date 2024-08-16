@@ -26,8 +26,6 @@ document.body.appendChild(renderer.domElement)
 const loader = new FontLoader()
 
 // TENSOR
-const tensor = new Tensor()
-tensor.cargar(1, 3, 2, 0, 9)
 const cubeWidth = 5
 const cubeHeight = 5
 const fontSize = 2
@@ -60,15 +58,17 @@ const material = new THREE.MeshBasicMaterial({
 // CUBE
 const cube = new THREE.Mesh(geometry, material)
 
-const totalWidth = tensor.columnas * (cubeWidth + gap)
-const totalHeight = tensor.filas * (cubeHeight + gap)
 
 export function drawTensor(tensor) {
   const font = loader.parse(json)
+  const totalWidth = tensor.columnLength() * (cubeWidth + gap)
+  const totalHeight = tensor.rowLength() * (cubeHeight + gap)
+  const t = tensor.tensor()
 
-  for (let z = 0; z < tensor.capas; z++) {
-    for (let x = 0; x < tensor.filas; x++) {
-      for (let y = 0; y < tensor.columnas; y++) {
+
+  for (let z = 0; z < tensor.layers(); z++) {
+    for (let x = 0; x < tensor.rowLength(); x++) {
+      for (let y = 0; y < tensor.columnLength(); y++) {
         const geometry = new THREE.BoxGeometry(cubeWidth, cubeHeight, cubeDepth)
         const material = new THREE.MeshBasicMaterial({
           color: colors[(x + y + z) % colors.length],
@@ -84,7 +84,7 @@ export function drawTensor(tensor) {
         )
         scene.add(cube)
 
-        const textGeometry = new TextGeometry(tensor.tensor[z][x][y].toString(), {
+        const textGeometry = new TextGeometry(t[z][x][y].toString(), {
           font: font,
           size: fontSize,
           depth: fontHeight
